@@ -1,0 +1,37 @@
+.template-card-holder{
+    width:80vw;
+    display:flex;
+    flex-direction:row;  
+    flex-wrap:wrap;
+    justify-content: flex-start;
+    margin:auto;
+}
+
+.page-center{
+    display:block;
+    margin:auto;
+    text-align:center;
+}
+
+.welcome-name{
+    margin:auto;
+    text-align: center;
+    padding-top: 5rem;
+    padding-bottom:5rem;
+}
+
+.welcome-name::after{
+    content: ""; 
+    display: block; 
+    margin: 1rem auto; 
+    width: 60%; 
+    border-bottom: 3px solid black; 
+    border-color:  #f2eaef;
+    border-radius: 5px;
+}
+
+@media (max-width: 640px) {
+    .welcome-name{
+        font-size:2rem !important;
+    }
+}

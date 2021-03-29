@@ -1,0 +1,104 @@
+a:hover{
+    text-decoration: none !important;
+}
+
+.card-base{
+    width:19.25vw;
+    margin-bottom: 4em;
+}
+
+.card-base:nth-of-type(even){
+    margin-right:1vw;
+    margin-left:1vw;
+}
+
+.card-base:nth-child(4){
+    margin-right:0vw;
+}
+
+.button-right{
+    margin-left:20px;
+}
+
+.author-text{
+    margin-top:20px;
+    margin-bottom:8px;
+    color:#9c9c9c;
+}
+
+.title-tooltip-text{
+    font-size:18px;
+    width:auto;
+    line-height:1.3;
+    padding-top:0px;
+    margin-bottom:0px;
+}
+
+.descrip-tooltip-text{
+    font-size:14px;
+    width:auto;
+    line-height:1.3;
+    padding-top:0px;
+    margin-bottom:0px;
+}
+
+.card-actions{
+    display:flex;
+    margin-top:auto;
+    margin-left:auto;
+    margin-right:0.3vw;
+}
+
+.hide{
+    display:none;
+}
+
+.card-top{
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.card-top .delete-icon{
+    height:10px;
+    width:10px;
+}
+
+.card-container{
+    display:flex;
+    flex-direction: column;
+}
+
+.MuiPaper-outlined{
+    border: 1.5px solid rgba(0, 0, 0, 0.12) !important;
+}
+
+.MuiCardContent-root{
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
+}
+
+
+@media (max-width: 1280px) { 
+    .card-base{
+        width: 38.5vw;
+        margin-bottom: 2em;
+    }
+
+    .card-base:nth-of-type(even){
+        margin-right:0vw;
+        margin-left:3vw;
+    }
+}
+
+@media (max-width: 560px) { 
+    .card-base{
+        width: 100%;
+        margin-bottom: 2em;
+    }
+
+    .card-base:nth-of-type(even){
+        margin-left:0vw;
+    }
+}

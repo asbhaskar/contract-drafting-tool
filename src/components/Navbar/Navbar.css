@@ -1,0 +1,52 @@
+.profile-pic{
+    width:100px;
+}
+
+.navbar-holder{
+    width:100vw;
+    padding-left:3%!important;
+    padding-right:3%!important;
+}
+
+.navbar-link{
+    color: rgba(0,0,0,.6);
+}
+
+.navbar-link:hover{
+    color: rgba(0,0,0,.6);
+    text-decoration:none;
+}
+
+.navbar-link-item{
+    margin-right:20px;
+    margin-left:20px;
+    /* align-self:center; */
+    margin-top:2px;
+}
+
+.navbar-link-item:hover{
+    text-decoration:none;
+    color: rgba(0,0,0,.8);
+}
+
+@media (max-width: 1000px) { 
+    .hide-on-mobile{
+        display: none !important;
+    }
+
+    .navbar-nav{
+        flex-direction:row !important;
+        justify-content:flex-end;
+        margin-top:1em;
+    }
+
+    .navbar-toggler{
+        margin-left:auto;
+    }
+
+    .dropdown-menu, .show{
+        min-width:5rem !important;
+    } 
+}
+
+
