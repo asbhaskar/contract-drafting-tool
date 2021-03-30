@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/contract-drafting-tool/static/css/main.d58a86d1.chunk.css",
+    "main.css": "/contract-drafting-tool/static/css/main.7d4dc22d.chunk.css",
     "main.js": "/contract-drafting-tool/static/js/main.acd2b179.chunk.js",
     "main.js.map": "/contract-drafting-tool/static/js/main.acd2b179.chunk.js.map",
     "runtime-main.js": "/contract-drafting-tool/static/js/runtime-main.55ff313c.js",
@@ -12,14 +12,14 @@
     "static/js/3.ce8f863e.chunk.js.map": "/contract-drafting-tool/static/js/3.ce8f863e.chunk.js.map",
     "index.html": "/contract-drafting-tool/index.html",
     "static/css/2.20aa2d7b.chunk.css.map": "/contract-drafting-tool/static/css/2.20aa2d7b.chunk.css.map",
-    "static/css/main.d58a86d1.chunk.css.map": "/contract-drafting-tool/static/css/main.d58a86d1.chunk.css.map",
+    "static/css/main.7d4dc22d.chunk.css.map": "/contract-drafting-tool/static/css/main.7d4dc22d.chunk.css.map",
     "static/js/2.cc4e5d9b.chunk.js.LICENSE.txt": "/contract-drafting-tool/static/js/2.cc4e5d9b.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.55ff313c.js",
     "static/css/2.20aa2d7b.chunk.css",
     "static/js/2.cc4e5d9b.chunk.js",
-    "static/css/main.d58a86d1.chunk.css",
+    "static/css/main.7d4dc22d.chunk.css",
     "static/js/main.acd2b179.chunk.js"
   ]
 }
