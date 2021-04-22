@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/contract-drafting-tool/static/css/main.0431e00b.chunk.css",
-    "main.js": "/contract-drafting-tool/static/js/main.0e9a71c1.chunk.js",
-    "main.js.map": "/contract-drafting-tool/static/js/main.0e9a71c1.chunk.js.map",
+    "main.css": "/contract-drafting-tool/static/css/main.615f8795.chunk.css",
+    "main.js": "/contract-drafting-tool/static/js/main.f761b4bb.chunk.js",
+    "main.js.map": "/contract-drafting-tool/static/js/main.f761b4bb.chunk.js.map",
     "runtime-main.js": "/contract-drafting-tool/static/js/runtime-main.b16ffad0.js",
     "runtime-main.js.map": "/contract-drafting-tool/static/js/runtime-main.b16ffad0.js.map",
     "static/css/2.92200efa.chunk.css": "/contract-drafting-tool/static/css/2.92200efa.chunk.css",
@@ -12,14 +12,14 @@
     "static/js/3.f907befa.chunk.js.map": "/contract-drafting-tool/static/js/3.f907befa.chunk.js.map",
     "index.html": "/contract-drafting-tool/index.html",
     "static/css/2.92200efa.chunk.css.map": "/contract-drafting-tool/static/css/2.92200efa.chunk.css.map",
-    "static/css/main.0431e00b.chunk.css.map": "/contract-drafting-tool/static/css/main.0431e00b.chunk.css.map",
+    "static/css/main.615f8795.chunk.css.map": "/contract-drafting-tool/static/css/main.615f8795.chunk.css.map",
     "static/js/2.145e9d68.chunk.js.LICENSE.txt": "/contract-drafting-tool/static/js/2.145e9d68.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.b16ffad0.js",
     "static/css/2.92200efa.chunk.css",
     "static/js/2.145e9d68.chunk.js",
-    "static/css/main.0431e00b.chunk.css",
-    "static/js/main.0e9a71c1.chunk.js"
+    "static/css/main.615f8795.chunk.css",
+    "static/js/main.f761b4bb.chunk.js"
   ]
 }
