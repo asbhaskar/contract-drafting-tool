@@ -14,13 +14,11 @@ export function addClause(prevState, nextClauseId, nextVarId){
             editorState: EditorState.createEmpty()
         }
     }
-    // console.log("add clause " + nextClauseId)
     let [updatedVars, updatedVarDescs] = addVar(prevState, nextClauseId, nextVarId)
     return [updatedClauses, updatedVars, updatedVarDescs];
 }
 
 export function addVar(prevState, clauseId, nextVarId){
-    // console.log("add var " + clauseId)
     //Object.keys(prevState.vars).length causes issues -> see addClause for details
     //ids are similar in variables and their corresponding varDescs
     const updatedVars = {
@@ -75,11 +73,13 @@ export function deleteClause(prevState, clauseId){
     let updatedState = prevState;
     delete updatedState.clauses[clauseId]
     //delete variables associated with clauses
-    return deleteVariableWithClauseId(updatedState, clauseId)
+    return deleteVariableWithClauseId(updatedState, clauseId) 
 }
 
 export function deleteVariableWithClauseId(prevState, clauseId){
     let updatedState = prevState
+    //if no variables to iterate through, return prevState
+    if( Object.keys(updatedState.vars).length === 0 ) return prevState
     //item is also the index and is the same index for varDesc
     let updatedStateArray = Object.keys(updatedState.vars).map((item) => {
         if (updatedState.vars[item].clauseId === clauseId) {
@@ -105,7 +105,6 @@ export function deleteVariableWithVarId(prevState, varId){
 }
 
 export function getPreview(clauses){
-    //TODO: get editor content without using stateToHTML library
     let contentHTML = ''
     Object.values(clauses).forEach((item) => {
         contentHTML += stateToHTML(item.editorState.getCurrentContent())
@@ -118,8 +117,9 @@ export function getPreview(clauses){
 }
 
 function combineEditorStates(clausesObj){
+    let clausesObjCopy = {...clausesObj}
     let clauseStates = []
-    Object.values(clausesObj).forEach((item) => {
+    Object.values(clausesObjCopy).forEach((item) => {
         //Compile all editorStates into one block and convert to store in database
         if(typeof(item.editorState) !== 'string'){
             clauseStates.push(JSON.stringify(convertToRaw(item.editorState.getCurrentContent())))
@@ -129,54 +129,51 @@ function combineEditorStates(clausesObj){
 }
 
 function editorStateToRaw(clausesObj){
+    let clausesObjCopy = {...clausesObj}
     // console.log(clausesObj)
-    Object.values(clausesObj).forEach((item) => {
+    Object.values(clausesObjCopy).forEach((item) => {
         //Convert each editorState into raw blocks
         if(typeof(item.editorState) !== 'string'){
             item.editorState = JSON.stringify(convertToRaw(item.editorState.getCurrentContent()))
         }
         // console.log(clauseStates)
     })
-    return clausesObj
+    return clausesObjCopy
 }
 
 export function rawToEditorState(clausesObj){
-    // console.log(clausesObj)
     Object.values(clausesObj).forEach((item) => {
-        // console.log(item.editorState)
         if(typeof(item.editorState) === 'string'){
             let placeholder = convertFromRaw(JSON.parse(item.editorState))
             item.editorState = EditorState.createWithContent(placeholder)
         }
     })
-    // console.log(clausesObj)
     return clausesObj
 }
 
-export function saveTemplateToFirebase(state, userUid, templateUid){
-    let rawStates = combineEditorStates(state.clauses)
-    let rawClauses = editorStateToRaw(state.clauses)
-    // console.log(rawClauses)
-    // console.log(rawStates)
+export async function saveTemplateToFirebase(stateCopy, userUid, templateUid){
+    let rawStates = combineEditorStates(stateCopy.clauses)
+    let rawClauses = await editorStateToRaw(stateCopy.clauses)
     let date = new Date()
     let dateString = date.toUTCString()
     let clauseIdArray = []
-    Object.values(state.clauses).forEach((obj) => (clauseIdArray.push(obj.id)))
-    let TemplateObject = {title: state.title,
-        description: state.description,
-        author:state.author,
+    Object.values(stateCopy.clauses).forEach((obj) => clauseIdArray.push(obj.id))
+    let TemplateObject = {title: stateCopy.title,
+        description: stateCopy.description,
+        author:stateCopy.author,
         clauses: rawClauses,
         rawClauseBlocksArray: rawStates,
-        vars: state.vars,
-        varDescs: state.varDescs,
+        vars: stateCopy.vars,
+        varDescs: stateCopy.varDescs,
         templateUid: templateUid,
         userUid: userUid,
         lastEdited: dateString}
     // console.log(TemplateObject)
-    database.ref('templates/' + templateUid).set(
+    await database.ref('templates/' + templateUid).set(
         TemplateObject
     )
-    database.ref('users/' + userUid + '/templates/'+ templateUid).update(
+    await database.ref('users/' + userUid + '/templates/'+ templateUid).update(
         TemplateObject
     )
+    await rawToEditorState(stateCopy.clauses)
 }

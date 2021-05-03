@@ -1,3 +1,7 @@
+.DraftEditor-root{
+  padding: 0 1vw 0 1vw;
+}
+
 .RichEditor-holder {
   height:100%;
 }

@@ -1562,6 +1562,17 @@
   dependencies:
     "@babel/runtime" "^7.4.4"
 
+"@material-ui/lab@^4.0.0-alpha.57":
+  version "4.0.0-alpha.57"
+  resolved "https://registry.yarnpkg.com/@material-ui/lab/-/lab-4.0.0-alpha.57.tgz#e8961bcf6449e8a8dabe84f2700daacfcafbf83a"
+  integrity sha512-qo/IuIQOmEKtzmRD2E4Aa6DB4A87kmY6h0uYhjUmrrgmEAgbbw9etXpWPVXuRK6AGIQCjFzV6WO2i21m1R4FCw==
+  dependencies:
+    "@babel/runtime" "^7.4.4"
+    "@material-ui/utils" "^4.11.2"
+    clsx "^1.0.4"
+    prop-types "^15.7.2"
+    react-is "^16.8.0 || ^17.0.0"
+
 "@material-ui/styles@^4.11.2":
   version "4.11.2"
   resolved "https://registry.yarnpkg.com/@material-ui/styles/-/styles-4.11.2.tgz#e70558be3f41719e8c0d63c7a3c9ae163fdc84cb"
@@ -3407,15 +3418,10 @@ caniuse-api@^3.0.0:
     lodash.memoize "^4.1.2"
     lodash.uniq "^4.5.0"
 
-caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001135:
-  version "1.0.30001150"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001150.tgz#6d0d829da654b0b233576de00335586bc2004df1"
-  integrity sha512-kiNKvihW0m36UhAFnl7bOAv0i1K1f6wpfVtTF5O5O82XzgtBnb05V0XeV3oZ968vfg2sRNChsHw8ASH2hDfoYQ==
-
-caniuse-lite@^1.0.30001125:
-  version "1.0.30001154"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001154.tgz#f3bbc245ce55e4c1cd20fa731b097880181a7f17"
-  integrity sha512-y9DvdSti8NnYB9Be92ddMZQrcOe04kcQtcxtBx4NkB04+qZ+JUWotnXBJTmxlKudhxNTQ3RRknMwNU2YQl/Org==
+caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001125, caniuse-lite@^1.0.30001135:
+  version "1.0.30001207"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001207.tgz"
+  integrity sha512-UPQZdmAsyp2qfCTiMU/zqGSWOYaY9F9LL61V8f+8MrubsaDGpaHD9HRV/EWZGULZn0Hxu48SKzI5DgFwTvHuYw==
 
 capture-exit@^2.0.0:
   version "2.0.0"
@@ -4021,6 +4027,11 @@ css-loader@4.3.0:
     postcss-value-parser "^4.1.0"
     schema-utils "^2.7.1"
     semver "^7.3.2"
+
+css-mediaquery@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/css-mediaquery/-/css-mediaquery-0.1.2.tgz#6a2c37344928618631c54bd33cedd301da18bea0"
+  integrity sha1-aiw3NEkoYYYxxUvTPO3TAdoYvqA=
 
 css-prefers-color-scheme@^3.1.1:
   version "3.1.1"
@@ -6266,7 +6277,7 @@ humanize-url@^1.0.0:
     normalize-url "^1.0.0"
     strip-url-auth "^1.0.0"
 
-hyphenate-style-name@^1.0.3:
+hyphenate-style-name@^1.0.0, hyphenate-style-name@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/hyphenate-style-name/-/hyphenate-style-name-1.0.4.tgz#691879af8e220aea5750e8827db4ef62a54e361d"
   integrity sha512-ygGZLjmXfPHj+ZWh6LwbC37l43MhfztxetbFCoYTM2VjkIUpeHgSNn7QIyVFj7YQ1Wl9Cbw5sholVJPzWvC2MQ==
@@ -8014,6 +8025,13 @@ map-visit@^1.0.0:
   integrity sha1-7Nyo8TFE5mDxtb1B8S80edmN+48=
   dependencies:
     object-visit "^1.0.0"
+
+matchmediaquery@^0.3.0:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/matchmediaquery/-/matchmediaquery-0.3.1.tgz#8247edc47e499ebb7c58f62a9ff9ccf5b815c6d7"
+  integrity sha512-Hlk20WQHRIm9EE9luN1kjRjYXAQToHOIAHPJn9buxBwuhfTHoKUcX+lXBbxc85DVQfXYbEQ4HcwQdd128E3qHQ==
+  dependencies:
+    css-mediaquery "^0.1.2"
 
 md5.js@^1.3.4:
   version "1.3.5"
@@ -9842,7 +9860,7 @@ prop-types-extra@^1.1.0:
     react-is "^16.3.2"
     warning "^4.0.0"
 
-prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -10128,6 +10146,16 @@ react-refresh@^0.8.3:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.8.3.tgz#721d4657672d400c5e3c75d063c4a85fb2d5d68f"
   integrity sha512-X8jZHc7nCMjaCqoU+V2I0cOhNW+QMBwSUkeXnTi8IPe6zaRWfn60ZzvFDZqWPfmSJfjub7dDW1SP0jaHWLu/hg==
+
+react-responsive@^8.2.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/react-responsive/-/react-responsive-8.2.0.tgz#e0ffb306cfd8f38c9c12e26725b9e1245fa9debc"
+  integrity sha512-iagCqVrw4QSjhxKp3I/YK6+ODkWY6G+YPElvdYKiUUbywwh9Ds0M7r26Fj2/7dWFFbOpcGnJE6uE7aMck8j5Qg==
+  dependencies:
+    hyphenate-style-name "^1.0.0"
+    matchmediaquery "^0.3.0"
+    prop-types "^15.6.1"
+    shallow-equal "^1.1.0"
 
 react-router-dom@^5.2.0:
   version "5.2.0"
@@ -10941,6 +10969,11 @@ shallow-clone@^3.0.0:
   integrity sha512-/6KqX+GVUdqPuPPd2LxDDxzX6CAbjJehAAOKlNpqqUpAqPM6HeL8f+o3a+JsyGjn2lv0WY8UsTgUJjU9Ok55NA==
   dependencies:
     kind-of "^6.0.2"
+
+shallow-equal@^1.1.0:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/shallow-equal/-/shallow-equal-1.2.1.tgz#4c16abfa56043aa20d050324efa68940b0da79da"
+  integrity sha512-S4vJDjHHMBaiZuT9NPb616CSmLf618jawtv3sufLl6ivK8WocjAo58cXwbRV1cgqxH0Qbv+iUt6m05eqEa2IRA==
 
 shebang-command@^1.2.0:
   version "1.2.0"

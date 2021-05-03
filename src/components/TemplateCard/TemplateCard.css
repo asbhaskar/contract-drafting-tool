@@ -12,7 +12,7 @@ a:hover{
     margin-left:1vw;
 }
 
-.card-base:nth-child(4){
+.card-base:nth-child(4n){
     margin-right:0vw;
 }
 
@@ -78,7 +78,6 @@ a:hover{
     margin-top: 0.6em;
     margin-bottom: 0.6em;
 }
-
 
 @media (max-width: 1280px) { 
     .card-base{

@@ -26,8 +26,13 @@
     padding-bottom:30px;
 }
 
-.fill-template-info input{
+.fill-template-info .fill-input{
     width:90%;
+    margin-bottom:1rem;
+}
+
+#fill-title-textfield{
+    font-size: 2rem !important;
 }
 
 .variable-fill{
@@ -54,7 +59,8 @@
 }
 
 .var-right-side input{
-    margin-right:0.5rem;
+    margin-right:0.2em;
+    padding-left:0.5em;
 }
 
 .var-right-side button{
@@ -106,6 +112,10 @@
     .var-fill-grid{
         grid-template-columns: 40% 2% 58%;
     }
+
+    .var-right-side{
+        margin: auto 0 auto auto;
+    }
 }
 
 @media (max-width: 640px) {
@@ -115,11 +125,7 @@
     .var-right-side{
         grid-column-start: 1;
         grid-column-end: 2;
-    }
-
-    h4 input{
-        font-size: 1.17em !important;
-        margin-top: 1em !important;
-        margin-bottom: 1em !important;
+        margin-left:2em;
+        margin-top:0.5em;
     }
 }

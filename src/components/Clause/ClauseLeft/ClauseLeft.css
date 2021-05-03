@@ -1,0 +1,38 @@
+.add-button button{
+    min-width:12rem;
+}
+
+.add-clause{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:15px;
+    margin-bottom:20px;
+}
+
+.add-var{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.clause-tooltip{
+    font-size:14px;
+    width:auto;
+    line-height:1.3;
+    padding-top:0px;
+    margin-bottom:0px;
+}
+
+.var-holder{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 5%;
+}
+
+@media (max-width: 1280px) { 
+    .var-holder{
+        margin-left:0px;
+        text-align:center;
+    }
+}

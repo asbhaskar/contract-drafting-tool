@@ -4,12 +4,12 @@ import './Home.css';
 function Home() {
     return (
         <div className="home-container">
-            <h2 className="home-header">This is a contract drafting tool, please sign in to use</h2>
+            <h2 className="home-header">This is a contract drafting tool, please sign in to use!</h2>
             <div className="home-description">
                 <div className="disclaimer">
                     <p><b>*DISCLAIMER:</b> Due to limitations of the package <a href="https://github.com/evidenceprime/html-docx-js">html-docx-js</a> which is used to download your finished contracts, you will only be able to view downloaded contracts in Microsoft Word versions 2007 and newer. Full details are available <a href="https://github.com/evidenceprime/html-docx-js">here</a>. A new exporting package / tool will be included in a future update.</p>
                     <p><b>*DISCLAIMER 2:</b> Due to the way Github Pages handles routing, you cannot refresh your browser anywhere other than this page. I am currently looking into workarounds including using react-router's HashRouter.</p>
-                    <i>The code for this project will be available on github when version 1.2 is released by mid-April.</i>
+                    <i>The code for this project will be available on github when version 1.2 is released by the end of April.</i>
                 </div>
                 <br />
                 <div className="home-description-section" id="what-is-this">
@@ -37,16 +37,28 @@ function Home() {
                         <li>This tool is hosted as a frontend application on Github Pages. A previous iteration was hosted on both AWS EC2 and an S3 bucket at different times during development.</li>
                         <li>This tool uses the Firebase package to communicate with a Realtime Database and authenticate users through google. A previous iteration used a REST API and React Redux to communicate with Firebase and any other services we used and store data. </li>
                     </ul>
-                    <p>It should also be noted that in addition to these changes, the entire application was rewritten from the ground up and redesigned.</p>
+                    <p>It should also be noted that in addition to these changes, the entire application was rewritten from the ground up and redesigned to remove branding.</p>
                 </div>
                 <div className="home-description-section" id="changelog">
                     <h3>Changelog</h3>
                     <p>*Updates will tentatively arrive every few weeks to a month. Whenever I have time, really.</p>
                     <ul>
-                        <li><b>Version 1.1.2</b> - 3/28/21. </li>
+                        <li><b>Version 1.1.4</b> - 4/22/21. </li>
                         <ul>    
-                            <li>Minor UI Improvements.</li>
+                            <li>Added a snackbar response when templates are saved.</li>
+                            <li>Added temporary formatting to improve the template preview function. Font sizes and formatting will be restandardized in a future update.</li>
+                            <li>Fixed a bug on the User Homepage where only three templates would appear on each line.</li>
+                            <li>Fixed a bug where after saving, the content blocks of editors would be stringified leading to errors on template preview.</li>
+                        </ul>
+                        <li><b>Version 1.1.3</b> - 4/8/21. </li>
+                        <ul>    
+                            <li>Fixed issues with deleting clauses on Create page.</li>
+                        </ul>
+                        <li><b>Version 1.1.2</b> - 3/30/21. </li>
+                        <ul>    
                             <li>Code Refactor Part 1/2.</li>
+                            <li>Minor UI Improvements.</li>
+                            <li>Navbar update - Improved rendering and mobile UI.</li>
                         </ul>
                         <li><b>Version 1.1.1</b> - 3/3/21. </li>
                         <ul>

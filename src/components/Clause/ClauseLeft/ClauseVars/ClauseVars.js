@@ -1,6 +1,7 @@
 import React from 'react';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import IconButton from '@material-ui/core/IconButton';
+import './ClauseVars.css'
 
 function ClauseVars({
     varItem,
@@ -21,7 +22,7 @@ function ClauseVars({
                 <label>Description: </label>
                 <input 
                     className="create-input var-desc-input"
-                    value = {varItem.value}
+                    value = {varItem.descValue}
                     onChange = {event => updateVarDesc(varItem.id, event)}/>
                 <IconButton onClick={deleteVar}>
                     <DeleteOutlineIcon data-var={varItem.id} style={{color:'#9ea7da'}}/>

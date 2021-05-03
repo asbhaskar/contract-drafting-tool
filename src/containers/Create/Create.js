@@ -14,6 +14,8 @@ import {
 import './Create.css';
 import Modal from '../../components/Modal/Modal';
 import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 import TextField from '@material-ui/core/TextField';
 import Clause from '../../components/Clause/Clause';
 
@@ -24,6 +26,7 @@ class Create extends Component {
         this.nextVarId = 1
         this.saved = false
         this.templateUid = ''
+        this.openSnackbar = false
     }
 
     state = {
@@ -52,7 +55,8 @@ class Create extends Component {
                 varId: 0,
                 value: ''
             }
-        }
+        },
+        openSnackbar: false
     }
 
     updateEditor = (newEditorState, clauseId) => {
@@ -139,21 +143,31 @@ class Create extends Component {
         return previewTextEditor
     }
 
-    handleSaveTemplate = () => {
+    handleSaveTemplate = async() => {
         if (!this.saved) {
             let templateUid = uuidv4()
             this.templateUid = templateUid
         }
-        let copyState = this.state
-        saveTemplateToFirebase(copyState, this.props.match.params.uid, this.templateUid)
+        let copyState = {...this.state}
+        await saveTemplateToFirebase(copyState, this.props.match.params.uid, this.templateUid)
         this.saved = true
+        this.setState({openSnackbar: true})
     }
+
+    handleCloseSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        this.setState({openSnackbar: false})
+      };
 
     render() {
         const clauseArray = [];
         for (let key in this.state.clauses) {
             clauseArray.push({id: this.state.clauses[key].id});
         }
+        const [lastItem] = clauseArray.slice(-1)
         let varArray = []
         for (let key in this.state.vars) {
             varArray.push({id: key, clauseId: this.state.vars[key].clauseId})
@@ -169,22 +183,20 @@ class Create extends Component {
                             className="title-input"
                             placeholder="Title"
                             value={this.state.title}
-                            onChange=
-                            {(event) => this.setState({title: event.target.value})}/>
+                            onChange={(event) => this.setState({title: event.target.value})}/>
                         <TextField
                             id="description-textfield"
                             placeholder="Title"
                             className="description-input"
                             value={this.state.description}
-                            onChange=
-                            {(event) => this.setState({description: event.target.value})}/>
+                            onChange={(event) => this.setState({description: event.target.value})}/>
                     </div>
                 </div>                
 				{clauseArray.map(clauseItem => (
 					<Clause
 						key={`clause_${clauseItem.id}`}
 						clauseId={clauseItem.id}
-						clauseArrayLength={clauseArray.length}
+						clauseLastId={lastItem.id}
 						varArray={varArray}
 						updateEditor={this.updateEditor}
 						addClause={this.handleAddClause}
@@ -194,6 +206,19 @@ class Create extends Component {
 						updateVar={this.handleUpdateVar}
 						updateVarDesc={this.handleUpdateVarDesc}/>
 					))}
+                <Snackbar 
+                    open={this.state.openSnackbar} 
+                    autoHideDuration={3000} 
+                    onClose={this.handleCloseSnackbar} 
+                    anchorOrigin={{ vertical:'bottom', horizontal:'left' }}>
+                    <MuiAlert 
+                        elevation={6} 
+                        onClose={this.handleCloseSnackbar} 
+                        severity="success"
+                        variant="filled">
+                        Template Saved!
+                    </MuiAlert>
+                </Snackbar>
                 <div className="exit-options">
                     <div className="exit-buttons">
                         <Modal type="create-preview" getEditorPreview={this.handleGetPreview}/>

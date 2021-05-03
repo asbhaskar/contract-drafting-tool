@@ -7,7 +7,7 @@ function ModalDialog(props) {
     return (
         <div className="modal-dialog">
             <DialogTitle id="alert-dialog-title">{ props.dialogTitle }</DialogTitle>
-            <DialogContent>
+            <DialogContent className="dialog-content">
                 { props.alertDialog }
             </DialogContent>
         </div>

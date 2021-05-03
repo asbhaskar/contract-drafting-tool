@@ -5,6 +5,7 @@ import { stateToHTML } from 'draft-js-export-html';
 import { EditorState } from 'draft-js';
 import Button from '@material-ui/core/Button';
 import Modal from '../../components/Modal/Modal';
+import TextField from '@material-ui/core/TextField';
 // import Typography from '@material-ui/core/Typography';
 import htmlDocx from 'html-docx-js/dist/html-docx';
 import { saveAs } from 'file-saver';
@@ -34,16 +35,12 @@ export class Fill extends Component {
     }
 
     handleFillVarInEditor = (index, value) => {
-        //if both var holders have the same text there are problems
         let input = document.getElementById(index)
         let oldValue ='{' + value + '}'
-        if(typeof(input.value) === 'object' || input.value === ''){
-            return
-        }
+        if(typeof(input.value) === 'object' || input.value === '') return
         let newValue = input.value
         let newValueBrackets = '{' + input.value + '}'
         this.editorRef.current.onChangeContent(oldValue, newValueBrackets)
-        // set new value in state
         this.setState(prevState => ({
             ...prevState, 
             vars: {
@@ -59,19 +56,15 @@ export class Fill extends Component {
     handleDownloadAsWord = () => {
         let editorState = this.state.editor.getCurrentContent()
         let editorHtml = stateToHTML(editorState)
-        let opening = '<!doctype html><html><body> ';
-        let closing = '</body></html>';
-        let content = opening + editorHtml +closing;
-        content = content.toString();
-        content = content.replace('{', '')
-        content = content.replace('}', '')
+        let content = `<!doctype html><html><body>${editorHtml}</body></html>`;
+        content = content.toString().replace('{', '').replace('}', '');
         let converted = htmlDocx.asBlob(content);
         let today = new Date();
         let dd = String(today.getDate()).padStart(2, '0');
-        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0
         let yyyy = today.getFullYear();
         today = mm + '-' + dd + '-' + yyyy;
-        return saveAs(converted, this.state.title +' '+ today +'.docx');
+        return saveAs(converted, `${this.state.title}_${today}.docx`);
     }
 
     render() {
@@ -84,11 +77,12 @@ export class Fill extends Component {
             <div className="fill-grid">
                 <div className="fill-left-side">
                     <div className="fill-template-info">
-                        <h4><input 
-                                className="fill-input title-input"
-                                value = {this.state.title}
-                                onChange = {(event) => this.setState({title: event.target.value})}/></h4>
-                        {/* <h1>{this.state.title}</h1> */}
+                        <TextField
+                            id="fill-title-textfield"
+                            placeholder="Title"
+                            className="fill-input title-input"
+                            value = {this.state.title}
+                            onChange = {(event) => this.setState({title: event.target.value})}/>
                         <h5>Author: {this.state.author}</h5>
                     </div>
                     {clauseIdArray.map((clause, index) => (
@@ -96,7 +90,7 @@ export class Fill extends Component {
                             <h4>Clause {parseInt(clause) + 1}:</h4>
                             <div className="variable-fill">
                             {Object.keys(this.state.vars).map((variable, varIndex) => (
-                                (this.state.vars[varIndex].clauseId === index) ?
+                                (this.state.vars[varIndex].clauseId === index) &&
                                     <div key={varIndex} className="var-fill-grid">
                                         <span className="var-left-side">{this.state.varDescs[varIndex].value} :</span>
                                         <span className="var-right-side">
@@ -110,7 +104,7 @@ export class Fill extends Component {
                                                 var-value={ this.state.vars[varIndex].value }
                                                 onClick={() => this.handleFillVarInEditor(varIndex, this.state.vars[varIndex].value)}>Fill</Button>
                                         </span>
-                                    </div>:<div key={varIndex}></div>
+                                    </div>
                             ))}
                             </div>
                         </div>
@@ -122,12 +116,12 @@ export class Fill extends Component {
                     </div>
                 </div>
                 <div className="fill-right-side">
-                    <TextEditor
+                    <TextEditor 
                         clause = {1}
                         ref={this.editorRef}
                         initialState = {initialEditorState}
                         spellCheck={true} 
-                        update={this.updateEditor}/>
+                        updateEditor={this.updateEditor}/>
                 </div>
             </div>
         )

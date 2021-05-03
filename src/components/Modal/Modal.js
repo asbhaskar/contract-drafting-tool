@@ -25,7 +25,7 @@ function Modal(props) {
             break;
         case ('create-preview'):
             buttonDialog = "Preview"
-            dialogTitle = "Preview"
+            dialogTitle = "Template Preview"
             onModalOpen = () => setAlertDialog(props.getEditorPreview())
             exitModalOptions = [
                 {dialog: "Exit", onButtonClick: null}]
@@ -58,7 +58,7 @@ function Modal(props) {
     };
 
     return (
-        <div>
+        <React.Fragment>
             <Button variant="contained" color="primary" onClick={() => handleClickOpen(onModalOpen)}>
                 { buttonDialog }
             </Button>
@@ -79,7 +79,7 @@ function Modal(props) {
                     ))}
                 </DialogActions>
             </Dialog>
-        </div>
+        </React.Fragment>
     );
 }
 

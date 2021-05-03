@@ -15,6 +15,8 @@ import '../Create/Create.css';
 import './Edit.css';
 import Modal from '../../components/Modal/Modal';
 import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 import TextField from '@material-ui/core/TextField';
 import Clause from '../../components/Clause/Clause';
 
@@ -29,7 +31,8 @@ class Edit extends Component {
             description: this.props.location.state.data.description,
             clauses: rawToEditorState(this.props.location.state.data.clauses),
             vars: this.props.location.state.data.vars,
-            varDescs: this.props.location.state.data.varDescs
+            varDescs: this.props.location.state.data.varDescs,
+            openSnackbar: false
         }
         this.nextVarId = parseInt(Object.keys(this.state.vars)[
             Object
@@ -101,8 +104,7 @@ class Edit extends Component {
         }
         let updatedState = await deleteClause(this.state, clauseId)
         this.setState({clauses: updatedState.clauses, vars: updatedState.vars, varDescs: updatedState.varDesc})
-        // If there is only one clause at time of deletion, delete it and add another
-        // clause
+        // If there is only one clause at time of deletion, delete it and add another clause
         if (Object.keys(updatedState.clauses).length === 0) {
             return this.handleAddClause()
         }
@@ -127,15 +129,24 @@ class Edit extends Component {
         return previewTextEditor
     }
 
-    handleSaveTemplate = () => {
+    handleSaveTemplate = async() => {
         if (!this.saved) {
             let templateUid = uuidv4()
             this.templateUid = templateUid
         }
         let copyState = this.state
-        saveTemplateToFirebase(copyState, this.props.match.params.uid, this.templateUid)
+        await saveTemplateToFirebase(copyState, this.props.match.params.uid, this.templateUid)
         this.saved = true
+        this.setState({openSnackbar: true})
     }
+
+    handleCloseSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        this.setState({openSnackbar: false})
+      };
 
     render() {
         const clauseArray = [];
@@ -144,41 +155,28 @@ class Edit extends Component {
         }
         let varArray = []
         for (let key in this.state.vars) {
-            varArray.push({id: key, clauseId: this.state.vars[key].clauseId, value: this.state.vars[key].value})
+            varArray.push({id: key, clauseId: this.state.vars[key].clauseId, value: this.state.vars[key].value, descValue: this.state.varDescs[key].value})
         }
         return (
             <div className="create-holder">
                 <div className="header-border">
 					<div className="header-info-grid">
-							<h2 className="title-label">Template Title:</h2>
-							<h4 className="description-label">Template Description:</h4>
-							<TextField
-								id="title-textfield"
-								className="title-input"
-								placeholder="Title"
-								value={this.state.title}
-								onChange=
-								{(event) => this.setState({title: event.target.value})}/>
-							<TextField
-								id="description-textfield"
-								placeholder="Title"
-								className="description-input"
-								value={this.state.description}
-								onChange=
-								{(event) => this.setState({description: event.target.value})}/>
-                    {/* <div className="header-info-grid">
-                        <h2 className="title-label">Template Title:</h2>
-                        <h4 className="description-label">Template Description:</h4>
-                        <input
-                            className="title-input"
-                            value={this.state.title}
-                            onChange=
-                            {(event) => this.setState({title: event.target.value})}/>
-                        <input
-                            className="description-input"
-                            value={this.state.description}
-                            onChange=
-                            {(event) => this.setState({description: event.target.value})}/> */}
+						<h2 className="title-label">Template Title:</h2>
+						<h4 className="description-label">Template Description:</h4>
+						<TextField
+							id="title-textfield"
+							className="title-input"
+							placeholder="Title"
+							value={this.state.title}
+							onChange=
+							{(event) => this.setState({title: event.target.value})}/>
+						<TextField
+							id="description-textfield"
+							placeholder="Title"
+							className="description-input"
+							value={this.state.description}
+							onChange=
+							{(event) => this.setState({description: event.target.value})}/>
                     </div>
                 </div>
                 {clauseArray.map(clauseItem => (
@@ -195,11 +193,28 @@ class Edit extends Component {
 						deleteVar={this.handleDeleteVar}
 						updateVar={this.handleUpdateVar}
 						updateVarDesc={this.handleUpdateVarDesc}/>))}
+                <Snackbar 
+                    open={this.state.openSnackbar} 
+                    autoHideDuration={3000} 
+                    onClose={this.handleCloseSnackbar} 
+                    anchorOrigin={{ vertical:'bottom', horizontal:'left' }}>
+                    <MuiAlert 
+                        elevation={6} 
+                        onClose={this.handleCloseSnackbar} 
+                        severity="success"
+                        variant="filled">
+                        Template Saved!
+                    </MuiAlert>
+                </Snackbar>
                 <div className="exit-options">
                     <div className="exit-buttons exit-buttons-grid">
                         <div className="left-buttons">
-                            <Modal type="create-preview" getEditorPreview={this.handleGetPreview}/>
-                            <Button variant="contained" color="primary" onClick={this.handleSaveTemplate}>Save</Button>
+                            <Modal 
+                                type="create-preview" 
+                                getEditorPreview={this.handleGetPreview}/>
+                            <Button variant="contained" 
+                                color="primary" 
+                                onClick={this.handleSaveTemplate}>Save</Button>
                         </div>
                         <div className="right-buttons">
                             <Button
@@ -207,9 +222,11 @@ class Edit extends Component {
                                 color="primary"
                                 onClick={() => {
                                 this.saved = false 
-								this.handleSaveTemplate()
-                            }}>Save As</Button>
-                            <Modal type="create-exit" saveAndExit={this.handleSaveTemplate}/>
+								this.handleSaveTemplate()}}
+                            >Save As</Button>
+                            <Modal 
+                                type="create-exit" 
+                                saveAndExit={this.handleSaveTemplate}/>
                         </div>
                     </div>
                 </div>

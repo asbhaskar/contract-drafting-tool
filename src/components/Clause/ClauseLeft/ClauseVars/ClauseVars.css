@@ -1,0 +1,49 @@
+.create-var-desc-holder, .create-var-holder{
+    display:inline;
+}
+
+.create-input{
+    margin-left:5px;
+    margin-right:5px;
+    margin-bottom:10px;
+}
+
+.var-desc-input{
+    width: 30%;
+}
+
+.var-input{
+    width: 20%;
+    margin-right: 15px;
+}
+
+@media (max-width: 560px) { 
+    .create-var-holder, .create-var-desc-holder{
+        display:grid;
+        grid-template-columns: 35% 50% 15%;
+        margin-bottom:0.5em;
+    }
+
+    .create-var-holder label, .create-var-desc-holder label{
+        grid-column-start: 1;
+        grid-column-end: 2;
+        text-align: start;
+        margin:auto 0;
+    }
+
+    .create-var-holder input, .create-var-desc-holder input{
+        grid-column-start: 2;
+        grid-column-end: 3;
+        margin:auto 0;
+    }
+
+    .inputs{
+        margin-bottom:1em;
+        margin-left:0em;
+    }
+
+    .var-input, .var-desc-input{
+        width: 100%;
+        margin-right: 0px;
+    }
+}

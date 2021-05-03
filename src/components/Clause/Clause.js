@@ -1,10 +1,11 @@
 import React from 'react';
 import ClauseLeft from './ClauseLeft/ClauseLeft';
 import TextEditor from '../../components/Editor/Editor';
+import './Clause.css';
 
 function Clause({
     clauseId,
-    clauseArrayLength,
+    clauseLastId,
     varArray,
     updateEditor,
 	initialEditorState,
@@ -23,7 +24,7 @@ function Clause({
                     <div className="clause-left-side">
                         <ClauseLeft
                             clauseId={clauseId}
-                            clauseArrayLength={clauseArrayLength}
+                            clauseLastId={clauseLastId}
                             varArray={varArray}
                             addClause={addClause}
                             addVar={addVar}

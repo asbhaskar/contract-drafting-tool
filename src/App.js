@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import Navbar from './components/Navbar/Navbar';
+import Navigation from './components/Navigation/Navigation';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Route, Switch, withRouter, Redirect} from 'react-router-dom';
 import {signInWithGoogle, saveUserDataInFirebase} from './firebase/firebase.utils';
@@ -65,18 +65,18 @@ class App extends React.Component {
                 {this.state.currentUser
                     ? (
                         <div>
-                            <Navbar
+                            <Navigation
                                 photo={this.state.currentUser.photoURL}
                                 displayName={this.state.currentUser.displayName}
 								uid={this.state.currentUser.uid}
-                                auth={auth}/>
+                                signOut={auth.signOut}/>
                         </div>
                     )
                     : <div>
-                        <Navbar
+                        <Navigation
                             photo={guestIcon}
                             displayName='Guest'
-                            auth={auth}
+                            signOut={auth.signOut}
                             signIn={signInWithGoogle}/>
                     </div>
 				}
