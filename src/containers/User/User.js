@@ -53,18 +53,20 @@ export class User extends Component {
                     Welcome, {this.props.location.state.author}
                 </Typography>
                 {/* Create cards for each  */}
-                {(this.state.loading)
-                    ? <div className="page-center"><CircularProgress/></div>
-                    : <div>
-                        {(templateArray.length === 0)
-                            ? <Typography
-                                    variant="h5"
-                                    component="h5"
-                                    color="textSecondary"
-                                    className="page-center">
-                                    You currently have no saved Templates, click "Create Template" to get started!
-                                </Typography>
-                            : <div className="template-card-holder">
+                {(this.state.loading) && 
+                    <div className="page-center"><CircularProgress/></div>}
+                {(!this.state.loading) && 
+                    <React.Fragment>
+                        {(templateArray.length === 0) &&
+                            <Typography
+                                variant="h5"
+                                component="h5"
+                                color="textSecondary"
+                                className="page-center">
+                                You currently have no saved Templates, click "Create Template" to get started!
+                            </Typography>}
+                        {(templateArray.length !== 0) &&
+                            <div className="template-card-holder">
                                 {templateArray.map(item => (
                                     <TemplateCard
                                         key={item.templateUid}
@@ -75,8 +77,9 @@ export class User extends Component {
                                         userUid={this.props.match.params.uid}
                                         lastEdited={new Date(item.lastEdited).toLocaleString('en-us', {dateStyle: 'medium'})}
                                         data={item}/>))}
-                            </div>}
-                    </div>
+                            </div>
+                        }
+                    </React.Fragment>
                 }
             </div>
         )

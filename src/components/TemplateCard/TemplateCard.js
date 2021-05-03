@@ -11,7 +11,16 @@ import {delTemplateFromFirebase} from '../../firebase/firebase.utils';
 import {Link} from 'react-router-dom';
 import './TemplateCard.css';
 
-function TemplateCard(props) {
+function TemplateCard({
+    key,
+    title,
+    author,
+    description,
+    templateUid,
+    userUid,
+    lastEdited,
+    data
+}) {
     const [deleted, setDeleted] = useState(false);
 
     const handleDelTemplateFromFirebase = (userUid, templateUid) => {
@@ -29,7 +38,7 @@ function TemplateCard(props) {
                         Template
                     </Typography>
                     <IconButton
-                        onClick={() => handleDelTemplateFromFirebase(props.userUid, props.templateUid)}
+                        onClick={() => handleDelTemplateFromFirebase(userUid, templateUid)}
                         className="delete-icon">
                         <DeleteOutlineIcon
                             style={{
@@ -38,25 +47,25 @@ function TemplateCard(props) {
                     </IconButton>
                 </div>
                 <Tooltip
-                    title={< p className = "title-tooltip-text" > { props.title } </p> }
+                    title={< p className = "title-tooltip-text" > { title } </p> }
                     className="title-tooltip"
                     arrow >
                     <Typography variant="h5" component="h2" noWrap={true}>
-                        {props.title}
+                        {title}
                     </Typography>
                 </Tooltip>
                 {/* <Typography color="textSecondary" className="author-text"> */}
-                <p className="author-text">by: {props.author}</p>
+                <p className="author-text">by: {author}</p>
                 <Typography color="textSecondary" variant="body2" gutterBottom>
-                    Last Edited: {props.lastEdited}
+                    Last Edited: {lastEdited}
                 </Typography>
                 {/* </Typography> */}
                 <Tooltip
-                    title={<p className = "descrip-tooltip-text"> { props.description } </p>}
+                    title={<p className = "descrip-tooltip-text"> { description } </p>}
                     className="title-tooltip"
                     arrow >
                     <Typography variant="body2" component="p" className="description" noWrap={true}>
-                        {props.description}
+                        {description}
                     </Typography>
                 </Tooltip>
             </CardContent>
@@ -64,24 +73,24 @@ function TemplateCard(props) {
                 <Button size="small">
                     <Link
                         to={{
-                        pathname: `/contract-drafting-tool/user/${props.userUid}/edit/${props.templateUid}`,
+                        pathname: `/contract-drafting-tool/user/${userUid}/edit/${templateUid}`,
                         state: {
-                            data: props.data
+                            data: data
                         }
                     }}>Edit</Link>
                 </Button>
                 <Button size="small" className="button-right">
                     <Link
                         to={{
-                        pathname: `/contract-drafting-tool/user/${props.userUid}/fill/${props.templateUid}`,
+                        pathname: `/contract-drafting-tool/user/${userUid}/fill/${templateUid}`,
                         state: {
-                            data: props.data,
-                            author: props.data.author,
-                            description: props.description,
-                            clauses: props.data.clauses,
-                            title: props.title,
-                            vars: props.data.vars,
-                            varDescs: props.data.varDescs
+                            data: data,
+                            author: data.author,
+                            description: description,
+                            clauses: data.clauses,
+                            title: title,
+                            vars: data.vars,
+                            varDescs: data.varDescs
                         }
                     }}>Generate</Link>
                 </Button>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TextEditor from '../../components/Editor/Editor';
+import FillClause from '../../components/FillClause/FillClause';
 import { createEditorFromRaw } from './utils/utils';
 import { stateToHTML } from 'draft-js-export-html';
 import { EditorState } from 'draft-js';
@@ -68,7 +69,6 @@ export class Fill extends Component {
     }
 
     render() {
-        let initialEditorState = this.state.editor
         let clauseIdArray = []
         for(let i in this.state.clauses){
             clauseIdArray.push(i)
@@ -86,28 +86,13 @@ export class Fill extends Component {
                         <h5>Author: {this.state.author}</h5>
                     </div>
                     {clauseIdArray.map((clause, index) => (
-                        <div key={'clause_'+ index} className="fill-clause-holder">
-                            <h4>Clause {parseInt(clause) + 1}:</h4>
-                            <div className="variable-fill">
-                            {Object.keys(this.state.vars).map((variable, varIndex) => (
-                                (this.state.vars[varIndex].clauseId === index) &&
-                                    <div key={varIndex} className="var-fill-grid">
-                                        <span className="var-left-side">{this.state.varDescs[varIndex].value} :</span>
-                                        <span className="var-right-side">
-                                            <input 
-                                                placeholder={this.state.vars[varIndex].value} 
-                                                id={varIndex}/>
-                                            <Button 
-                                                variant="outlined" 
-                                                color="primary"
-                                                data-index={varIndex} 
-                                                var-value={ this.state.vars[varIndex].value }
-                                                onClick={() => this.handleFillVarInEditor(varIndex, this.state.vars[varIndex].value)}>Fill</Button>
-                                        </span>
-                                    </div>
-                            ))}
-                            </div>
-                        </div>
+                        <FillClause 
+                            key = {`clause_${index}`}
+                            index = {index}
+                            clause = {clause}
+                            varObj = {this.state.vars}
+                            varDescObj = {this.state.varDescs}
+                            handleFillVarInEditor = {this.handleFillVarInEditor}/>
                     ))}
                     <div className="fill-exit-options">
                         <Button variant="contained" color="primary" onClick={this.handleDownloadAsWord}>Save As Word (.docx)</Button>
@@ -116,10 +101,9 @@ export class Fill extends Component {
                     </div>
                 </div>
                 <div className="fill-right-side">
-                    <TextEditor 
-                        clause = {1}
+                    <TextEditor
                         ref={this.editorRef}
-                        initialState = {initialEditorState}
+                        initialState = {this.state.editor}
                         spellCheck={true} 
                         updateEditor={this.updateEditor}/>
                 </div>
@@ -128,4 +112,4 @@ export class Fill extends Component {
     }
 }
 
-export default Fill
+export default Fill;

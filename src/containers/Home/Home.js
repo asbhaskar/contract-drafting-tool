@@ -9,7 +9,7 @@ function Home() {
                 <div className="disclaimer">
                     <p><b>*DISCLAIMER:</b> Due to limitations of the package <a href="https://github.com/evidenceprime/html-docx-js">html-docx-js</a> which is used to download your finished contracts, you will only be able to view downloaded contracts in Microsoft Word versions 2007 and newer. Full details are available <a href="https://github.com/evidenceprime/html-docx-js">here</a>. A new exporting package / tool will be included in a future update.</p>
                     <p><b>*DISCLAIMER 2:</b> Due to the way Github Pages handles routing, you cannot refresh your browser anywhere other than this page. I am currently looking into workarounds including using react-router's HashRouter.</p>
-                    <i>The code for this project will be available on github when version 1.2 is released by the end of April.</i>
+                    <i>The code for this project is available <a href="https://github.com/asbhaskar/contract-drafting-tool">here</a>.</i>
                 </div>
                 <br />
                 <div className="home-description-section" id="what-is-this">
@@ -43,6 +43,11 @@ function Home() {
                     <h3>Changelog</h3>
                     <p>*Updates will tentatively arrive every few weeks to a month. Whenever I have time, really.</p>
                     <ul>
+                        <li><b>Version 1.1.5</b> - 5/3/21. </li>
+                        <ul> 
+                            <li>Published code on <a href="https://github.com/asbhaskar/contract-drafting-tool">github</a>. Please note that the code is still being refactored.</li>
+                            <li>Fixed a typo in the code where editors did not update correctly.</li>
+                        </ul>
                         <li><b>Version 1.1.4</b> - 4/22/21. </li>
                         <ul>    
                             <li>Added a snackbar response when templates are saved.</li>
